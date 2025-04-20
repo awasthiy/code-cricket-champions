@@ -7,8 +7,8 @@ import LeaderboardTable from "@/components/LeaderboardTable";
 import ChallengesList from "@/components/ChallengesList";
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import GameStats from "@/components/GameStats";
-import { mockTeams, mockChallenges, scoreBreakdownData } from "@/data/mockData";
-import { Cricket, Users, Trophy, Target } from "lucide-react";
+import { Cricket } from "@/components/icons/Cricket";
+import { Users, Trophy, Target } from "lucide-react";
 
 const Index = () => {
   return (
@@ -97,3 +97,4 @@ const Index = () => {
 };
 
 export default Index;
+
