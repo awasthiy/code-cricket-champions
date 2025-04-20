@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,35 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Cricket-themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #0E4B8F;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6C1BAB;
+  }
+}
+
+/* Progress component custom colors */
+@layer components {
+  .Progress[data-indicator-color] {
+    --indicator-color: attr(data-indicator-color);
+  }
+  
+  .Progress[data-indicator-color] > div {
+    background-color: var(--indicator-color, hsl(var(--primary)));
   }
 }

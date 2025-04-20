@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,17 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				cricket: {
+					blue: "#0E4B8F",
+					purple: "#6C1BAB", 
+					gold: "#F2C94C",
+					lightblue: "#3E8DDD",
+					accent: "#FF6B6B",
+					success: "#4CAF50",
+					warning: "#F9A825",
+					dark: "#1F2937",
+					light: "#F9FAFB"
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -84,11 +96,21 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-light': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' },
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-light': 'pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'spin-slow': 'spin-slow 10s linear infinite'
 			}
 		}
 	},
