@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -97,20 +96,22 @@ export default {
 						height: '0'
 					}
 				},
-				'pulse-light': {
+        'pulse-light': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.7' },
 				},
-				'spin-slow': {
-					'0%': { transform: 'rotate(0deg)' },
-					'100%': { transform: 'rotate(360deg)' },
-				}
+        'dreamflash': {
+          "0%,100%": { opacity: 0 },
+          "15%": { opacity: 0.67 },
+          "35%": { opacity: 1 },
+          "80%": {opacity: 0.44 }
+        }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-light': 'pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-				'spin-slow': 'spin-slow 10s linear infinite'
+        'pulse-light': 'pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'dreamflash': 'dreamflash 1s cubic-bezier(.36,1.32,.38,.88)'
 			}
 		}
 	},
