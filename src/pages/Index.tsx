@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
@@ -10,24 +9,30 @@ import GameStats from "@/components/GameStats";
 import { Cricket } from "@/components/icons/Cricket";
 import { mockTeams, mockChallenges, scoreBreakdownData } from "@/data/mockData";
 import { Users, Trophy, Target } from "lucide-react";
+import GoogleAuth from "@/components/GoogleAuth";
+import SpinWheel from "@/components/SpinWheel";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      
+
       <main className="flex-1 container mx-auto py-6 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight mb-3 flex items-center gap-2">
-            <Cricket className="h-8 w-8 text-cricket-blue" />
-            <span>Code Cricket Champions</span>
-            <Badge className="ml-2 text-xs bg-cricket-gold text-black">Fantasy Bootcamp League</Badge>
-          </h1>
-          <p className="text-gray-600">
-            Track your team's performance in our AI-powered bootcamp fantasy league!
-          </p>
+        <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight mb-3 flex items-center gap-2">
+              <span>Code Cricket Champions</span>
+              <Badge className="ml-2 text-xs bg-cricket-gold text-black">Fantasy Bootcamp League</Badge>
+            </h1>
+            <p className="text-gray-600">
+              Track your team's performance in our AI-powered bootcamp fantasy league!
+            </p>
+          </div>
+          <GoogleAuth />
         </div>
         
+        <SpinWheel />
+
         <div className="mb-8">
           <GameStats />
         </div>
