@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function GoogleAuth() {
   const [user, setUser] = useState<any>(null);
@@ -23,18 +24,39 @@ export default function GoogleAuth() {
   }, []);
 
   const signInWithGoogle = async () => {
-    setLoading(true);
-    await supabase.auth.signInWithOAuth({
-      provider: "google"
-    });
-    setLoading(false);
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+      
+      if (error) {
+        toast.error("Login failed: " + error.message);
+        console.error("Google login error:", error);
+      }
+    } catch (err) {
+      console.error("Unexpected error during Google login:", err);
+      toast.error("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const signOut = async () => {
-    setLoading(true);
-    await supabase.auth.signOut();
-    setUser(null);
-    setLoading(false);
+    try {
+      setLoading(true);
+      await supabase.auth.signOut();
+      setUser(null);
+      toast.success("Logged out successfully");
+    } catch (err) {
+      console.error("Error during logout:", err);
+      toast.error("Logout failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -46,7 +68,7 @@ export default function GoogleAuth() {
       <Button
         onClick={signInWithGoogle}
         variant="outline"
-        className="flex gap-2 bg-white text-black"
+        className="flex gap-2 bg-white text-black hover:bg-gray-100"
       >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -61,7 +83,7 @@ export default function GoogleAuth() {
   return (
     <div className="flex items-center gap-2">
       <img
-        src={user.avatar_url ?? "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.email)}
+        src={user.user_metadata?.avatar_url ?? "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.email)}
         alt={user.email}
         className="h-8 w-8 rounded-full"
       />
