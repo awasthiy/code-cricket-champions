@@ -1,14 +1,10 @@
-
 import { TeamData } from "@/components/TeamCard";
 
 export const mockTeams: TeamData[] = [
   {
     id: 1,
-    name: "Code Ninjas",
-    members: [
-      { name: "Rahul Singh", role: "Senior Engineer" },
-      { name: "Ananya Patel", role: "Junior Engineer" }
-    ],
+    name: "Sportans",
+    members: [],
     challenge: {
       id: 2,
       title: "From Draw to Jaw",
@@ -25,10 +21,10 @@ export const mockTeams: TeamData[] = [
   },
   {
     id: 2,
-    name: "BugBusters",
+    name: "Dev Dynamos",
     members: [
-      { name: "Vikram Desai", role: "Senior Engineer" },
-      { name: "Priya Sharma", role: "Junior Engineer" }
+      { name: "Anuj", role: "Developer" },
+      { name: "Tejas", role: "Developer" }
     ],
     challenge: {
       id: 1,
@@ -46,10 +42,10 @@ export const mockTeams: TeamData[] = [
   },
   {
     id: 3,
-    name: "Byte Bandits",
+    name: "Debug Warriors",
     members: [
-      { name: "Arjun Mehta", role: "Senior Engineer" },
-      { name: "Neha Gupta", role: "Junior Engineer" }
+      { name: "Prathmesh", role: "Developer" },
+      { name: "Ashutosh", role: "Developer" }
     ],
     challenge: {
       id: 5,
@@ -67,10 +63,10 @@ export const mockTeams: TeamData[] = [
   },
   {
     id: 4,
-    name: "Tech Titans",
+    name: "Code Smashers",
     members: [
-      { name: "Kunal Joshi", role: "Senior Engineer" },
-      { name: "Riya Kumar", role: "Junior Engineer" }
+      { name: "Ashish", role: "Developer" },
+      { name: "Mohit", role: "Developer" }
     ],
     challenge: {
       id: 7,
@@ -85,6 +81,27 @@ export const mockTeams: TeamData[] = [
       total: 800
     },
     rank: 4
+  },
+  {
+    id: 5,
+    name: "UI Spartans",
+    members: [
+      { name: "Yash", role: "Developer" },
+      { name: "Yash A", role: "Developer" }
+    ],
+    challenge: {
+      id: 8,
+      title: "Scaffold Sorcery",
+      multiplier: 2.5
+    },
+    scores: {
+      fantasy: 280,
+      bootcamp: 270,
+      prediction: 60,
+      skill: 110,
+      total: 720
+    },
+    rank: 5
   }
 ];
 
