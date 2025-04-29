@@ -3,11 +3,12 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import TeamCard from "@/components/TeamCard";
 import LeaderboardTable from "@/components/LeaderboardTable";
+import PlayerLeaderboardTable from "@/components/PlayerLeaderboardTable";
 import ChallengesList from "@/components/ChallengesList";
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import GameStats from "@/components/GameStats";
 import { Cricket } from "@/components/icons/Cricket";
-import { mockTeams, mockChallenges, scoreBreakdownData } from "@/data/mockData";
+import { mockTeams, mockPlayers, mockChallenges, scoreBreakdownData } from "@/data/mockData";
 import { Users, Trophy, Target } from "lucide-react";
 import GoogleAuth from "@/components/GoogleAuth";
 import SpinWheel from "@/components/SpinWheel";
@@ -52,8 +53,21 @@ const Index = () => {
           
           <TabsContent value="leaderboard" className="space-y-6">
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="md:col-span-2">
-                <LeaderboardTable teams={mockTeams} />
+              <div className="md:col-span-2 space-y-6">
+                <div>
+                  <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-cricket-blue" />
+                    Team Rankings
+                  </h2>
+                  <LeaderboardTable teams={mockTeams} />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <Users className="h-5 w-5 text-cricket-purple" />
+                    Player Rankings
+                  </h2>
+                  <PlayerLeaderboardTable players={mockPlayers} />
+                </div>
               </div>
               <div>
                 <ScoreBreakdown {...scoreBreakdownData} />

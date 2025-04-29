@@ -1,24 +1,22 @@
 import { TeamData } from "@/components/TeamCard";
 
+export interface PlayerData {
+  id: number;
+  name: string;
+  teamId: number;
+  teamName: string;
+  role: string;
+  scores: {
+    fantasy: number;
+    bootcamp: number;
+    prediction: number;
+    skill: number;
+    total: number;
+  };
+  rank: number;
+}
+
 export const mockTeams: TeamData[] = [
-  {
-    id: 1,
-    name: "Sportans",
-    members: [],
-    challenge: {
-      id: 2,
-      title: "From Draw to Jaw",
-      multiplier: 3.0
-    },
-    scores: {
-      fantasy: 450,
-      bootcamp: 380,
-      prediction: 200,
-      skill: 120,
-      total: 1150
-    },
-    rank: 2
-  },
   {
     id: 2,
     name: "Dev Dynamos",
@@ -183,3 +181,126 @@ export const scoreBreakdownData = {
     }
   ]
 };
+
+export const mockPlayers: PlayerData[] = [
+  {
+    id: 1,
+    name: "Anuj",
+    teamId: 2,
+    teamName: "Dev Dynamos",
+    role: "Developer",
+    scores: {
+      fantasy: 256,
+      bootcamp: 213,
+      prediction: 125,
+      skill: 34,
+      total: 628
+    },
+    rank: 1
+  },
+  {
+    id: 2,
+    name: "Tejas",
+    teamId: 2,
+    teamName: "Dev Dynamos",
+    role: "Developer",
+    scores: {
+      fantasy: 256,
+      bootcamp: 212,
+      prediction: 125,
+      skill: 33,
+      total: 626
+    },
+    rank: 2
+  },
+  {
+    id: 3,
+    name: "Prathmesh",
+    teamId: 3,
+    teamName: "Debug Warriors",
+    role: "Developer",
+    scores: {
+      fantasy: 195,
+      bootcamp: 178,
+      prediction: 50,
+      skill: 45,
+      total: 468
+    },
+    rank: 3
+  },
+  {
+    id: 4,
+    name: "Ashutosh",
+    teamId: 3,
+    teamName: "Debug Warriors",
+    role: "Developer",
+    scores: {
+      fantasy: 194,
+      bootcamp: 178,
+      prediction: 50,
+      skill: 45,
+      total: 467
+    },
+    rank: 4
+  },
+  {
+    id: 5,
+    name: "Ashish",
+    teamId: 4,
+    teamName: "Code Smashers",
+    role: "Developer",
+    scores: {
+      fantasy: 158,
+      bootcamp: 145,
+      prediction: 25,
+      skill: 73,
+      total: 401
+    },
+    rank: 5
+  },
+  {
+    id: 6,
+    name: "Mohit",
+    teamId: 4,
+    teamName: "Code Smashers",
+    role: "Developer",
+    scores: {
+      fantasy: 157,
+      bootcamp: 145,
+      prediction: 25,
+      skill: 72,
+      total: 399
+    },
+    rank: 6
+  },
+  {
+    id: 7,
+    name: "Yash",
+    teamId: 5,
+    teamName: "UI Spartans",
+    role: "Developer",
+    scores: {
+      fantasy: 140,
+      bootcamp: 135,
+      prediction: 30,
+      skill: 55,
+      total: 360
+    },
+    rank: 7
+  },
+  {
+    id: 8,
+    name: "Yash A",
+    teamId: 5,
+    teamName: "UI Spartans",
+    role: "Developer",
+    scores: {
+      fantasy: 140,
+      bootcamp: 135,
+      prediction: 30,
+      skill: 55,
+      total: 360
+    },
+    rank: 8
+  }
+];
