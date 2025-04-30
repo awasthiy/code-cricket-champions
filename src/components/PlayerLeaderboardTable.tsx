@@ -1,12 +1,5 @@
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { PlayerData } from "@/data/mockData";
+import React from 'react';
+import { PlayerData } from '../data/mockData';
 import { Trophy, ArrowUp, ArrowDown, Minus, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -14,61 +7,37 @@ interface PlayerLeaderboardTableProps {
   players: PlayerData[];
 }
 
-const PlayerLeaderboardTable = ({ players }: PlayerLeaderboardTableProps) => {
+const PlayerLeaderboardTable: React.FC<PlayerLeaderboardTableProps> = ({ players }) => {
   const sortedPlayers = [...players].sort((a, b) => a.rank - b.rank);
   
   return (
-    <div className="rounded-lg border overflow-hidden">
-      <Table>
-        <TableHeader className="bg-cricket-purple text-white">
-          <TableRow>
-            <TableHead className="text-white">Rank</TableHead>
-            <TableHead className="text-white">Player</TableHead>
-            <TableHead className="text-white">Team</TableHead>
-            <TableHead className="text-white text-right">Fantasy</TableHead>
-            <TableHead className="text-white text-right">Bootcamp</TableHead>
-            <TableHead className="text-white text-right">Prediction</TableHead>
-            <TableHead className="text-white text-right">Skill</TableHead>
-            <TableHead className="text-white text-right">Total</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {sortedPlayers.map((player) => (
-            <TableRow key={player.id} className={player.rank === 1 ? "bg-cricket-light/50" : ""}>
-              <TableCell className="font-medium">
-                <div className="flex items-center gap-1">
-                  {player.rank === 1 && <Trophy className="h-4 w-4 text-cricket-gold" />}
-                  {player.rank === 2 && <Trophy className="h-4 w-4 text-gray-400" />}
-                  {player.rank === 3 && <Trophy className="h-4 w-4 text-amber-700" />}
-                  {player.rank > 3 && player.rank}
-                  <span className="ml-1 flex items-center">
-                    {Math.random() > 0.5 ? 
-                      <ArrowUp className="h-3 w-3 text-cricket-success" /> : 
-                      Math.random() > 0.5 ? 
-                        <ArrowDown className="h-3 w-3 text-cricket-accent" /> : 
-                        <Minus className="h-3 w-3 text-gray-400" />
-                    }
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell className="font-medium">{player.name}</TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-cricket-purple" />
-                  <span className="truncate max-w-[150px]">{player.teamName}</span>
-                </div>
-              </TableCell>
-              <TableCell className="text-right">{player.scores.fantasy}</TableCell>
-              <TableCell className="text-right">{player.scores.bootcamp}</TableCell>
-              <TableCell className="text-right">{player.scores.prediction}</TableCell>
-              <TableCell className="text-right">{player.scores.skill}</TableCell>
-              <TableCell className="font-bold text-right text-cricket-purple">
-                {player.scores.total}
-              </TableCell>
-            </TableRow>
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fantasy Points</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skill Score</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          {players.map((player) => (
+            <tr key={player.id} className="hover:bg-gray-50">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{player.rank}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{player.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{player.teamName}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{player.scores.normalized.toLocaleString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{player.scores.skill.toLocaleString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {(player.scores.normalized + player.scores.skill).toLocaleString()}
+              </td>
+            </tr>
           ))}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
     </div>
   );
 };
