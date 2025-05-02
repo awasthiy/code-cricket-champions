@@ -45,7 +45,7 @@ const TeamLeaderboardTable: React.FC<TeamLeaderboardTableProps> = ({ teams: prop
     const teamGroups = groupPlayersByTeam(players);
     
     // Convert to TeamData format
-    const teamsData: TeamData[] = Object.entries(teamGroups).map(([teamName, teamPlayers], index) => {
+    const teamsData = Object.entries(teamGroups).map(([teamName, teamPlayers], index) => {
       const totalFantasyPoints = teamPlayers.reduce((sum, player) => sum + player.fantasyPoints, 0);
       const totalSkillScore = teamPlayers.reduce((sum, player) => sum + player.skillScore, 0);
       
@@ -57,7 +57,8 @@ const TeamLeaderboardTable: React.FC<TeamLeaderboardTableProps> = ({ teams: prop
         scores: {
           total: totalFantasyPoints,
           skill: totalSkillScore
-        }
+        },
+        challenge: [] // Add the missing challenge property to satisfy the TeamData type
       };
     });
     
