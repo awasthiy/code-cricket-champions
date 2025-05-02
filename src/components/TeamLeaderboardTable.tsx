@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TeamData } from '../data/mockData';
 import {
   Table,
@@ -11,12 +11,69 @@ import {
 } from "@/components/ui/table";
 import { Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { parseCSV, groupPlayersByTeam, PlayerData } from '@/utils/csvParser';
 
 interface TeamLeaderboardTableProps {
-  teams: TeamData[];
+  teams?: TeamData[];
 }
 
-const TeamLeaderboardTable: React.FC<TeamLeaderboardTableProps> = ({ teams }) => {
+// Raw CSV data from the file
+const rawCSVData = `Player,Team,Challenge Accepted,Prediction Finalist Team 1,Prediction Finalist Team 2,Fantasy Leaderboard points,Skill Score
+Anuj,Dev Dynamos,Choice1: Test like a Titan,,30508,649
+Tejas,Dev Dynamos,,,4412,533
+Ashish,Code Smashers,"Choice1: Fix it Before it Breaks
+Choice2: From Draw to Jaw",,26758,670
+Mohit,Code Smashers,,,33065,742
+Prathmesh,Debug Warriors,"Choice1: Alfred the Ops Whisperer
+Choice2: The Gift of Code",,27114,623
+Ashutosh,Debug Warriors,,,4825,606
+Yash M,UI Spartans,"Choice1: Reviewer of Realms
+Choice2: Scaffold Socery",,31435,771
+Yash A,UI Spartans,,,33164,700`;
+
+const TeamLeaderboardTable: React.FC<TeamLeaderboardTableProps> = ({ teams: propTeams }) => {
+  const [teams, setTeams] = useState<TeamData[]>([]);
+  
+  useEffect(() => {
+    if (propTeams) {
+      setTeams(propTeams);
+      return;
+    }
+    
+    // Parse CSV data if no teams provided as props
+    const players = parseCSV(rawCSVData);
+    const teamGroups = groupPlayersByTeam(players);
+    
+    // Convert to TeamData format
+    const teamsData: TeamData[] = Object.entries(teamGroups).map(([teamName, teamPlayers], index) => {
+      const totalFantasyPoints = teamPlayers.reduce((sum, player) => sum + player.fantasyPoints, 0);
+      const totalSkillScore = teamPlayers.reduce((sum, player) => sum + player.skillScore, 0);
+      
+      return {
+        id: index.toString(),
+        name: teamName,
+        rank: index + 1, // Will be sorted later
+        members: teamPlayers.map(p => ({ id: p.name, name: p.name })),
+        scores: {
+          total: totalFantasyPoints,
+          skill: totalSkillScore
+        }
+      };
+    });
+    
+    // Sort by total score
+    const sortedTeams = teamsData.sort((a, b) => 
+      ((b.scores.total + b.scores.skill) - (a.scores.total + a.scores.skill))
+    );
+    
+    // Assign ranks based on the sort
+    sortedTeams.forEach((team, idx) => {
+      team.rank = idx + 1;
+    });
+    
+    setTeams(sortedTeams);
+  }, [propTeams]);
+  
   const sortedTeams = [...teams].sort((a, b) => a.rank - b.rank);
   
   return (
